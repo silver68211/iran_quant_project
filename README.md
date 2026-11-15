@@ -3,7 +3,7 @@
 A documented, modular, reproducible **research backtest** for a rules-based
 Iranian investment portfolio. It uses publicly accessible Tehran Stock Exchange
 (TSETMC) histories for real runs, and an explicitly labeled synthetic simulator
-for offline tests. It **does not place orders or promise investment returns**.
+for offline tests.
 
 ## Start here
 
@@ -112,15 +112,14 @@ announcements before treating live-mode results as reliable.
 
 For each asset `i` on signal day `t`, the past `M=60` trading-session momentum is:
 
-\[
- m_{i,t}=\frac{P_{i,t}}{P_{i,t-M}}-1
-\]
+$$
+m_{i,t}=\frac{P_{i,t}}{P_{i,t-M}}-1
+$$
 
 The broad-market index filter is based on its trailing `L=200` session average:
 
-\[
- \bar I_{200,t}=\frac{1}{200}\sum_{j=0}^{199}I_{t-j}
-\]
+ $$\bar I_{200,t}=\frac{1}{200}\sum_{j=0}^{199}I_{t-j}$$
+
 
 The **last exchange session of each completed Gregorian month** is the decision
 point. If the index is higher than its 200-session average, the two stocks with
