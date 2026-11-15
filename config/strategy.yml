@@ -1,0 +1,40 @@
+# All calendar dates in this file are Gregorian (YYYY-MM-DD).
+# Default: real TSETMC data. Use --mode demo explicitly for synthetic test data.
+project:
+  name: Tehran systematic multi-asset portfolio
+  start_date: '2020-01-01'
+  end_date: null                  # null means latest available market data
+  annual_trading_sessions: 240   # approximation; used ONLY for annualizing statistics
+
+market_data:
+  mode: live                      # live | demo; CLI can override
+  cache_max_age_hours: 24
+  request_timeout_seconds: 25
+  index_code: '32097828799138957'  # Tehran broad-market index, TSETMC
+  strict_execution: true         # abort if a requested trade has no price that session
+  assets:
+    - {id: FOOLAD, symbol: فولاد, name: Mobarakeh Steel, type: equity}
+    - {id: FMLI, symbol: فملی, name: National Iranian Copper, type: equity}
+    - {id: WBMLT, symbol: وبملت, name: Bank Mellat, type: equity}
+    - {id: SHPNA, symbol: شپنا, name: Isfahan Oil Refining, type: equity}
+    - {id: GOLD, symbol: طلا, name: Lotus Gold ETF, type: gold}
+    - {id: DEFENSIVE, symbol: یاقوت, name: Yaghut fixed-income ETF, type: defensive}
+
+strategy:
+  momentum_sessions: 60
+  trend_sessions: 200
+  risk_sessions: 60
+  max_equities: 2
+  equity_sleeve: 0.50
+  gold_sleeve: 0.30
+  # Unused stock/gold allocation is assigned to the defensive ETF.
+  # Portfolio decisions use the last exchange session of a COMPLETE Gregorian month.
+  stock_weighting: equal         # equal | inverse_vol
+  min_positive_momentum: 0.0
+
+backtest:
+  initial_capital_toman: 100000000
+  # Charged on BUY and SELL traded notional (not round trip).
+  cost_bps_per_side: 15.0
+  # Prices on suspended sessions are carried forward for indicative valuation.
+  # Trading such an instrument on a day without a new price is blocked.

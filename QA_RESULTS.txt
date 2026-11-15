@@ -1,0 +1,12 @@
+Validation summary — Iran Quant systematic research project
+=========================================================
+Status: PASS — 15 unit/integration tests.
+Command: python -m pytest -q
+Offline end-to-end run: PASS — python main.py --mode demo
+Files generated: strategy decisions, trade log, daily NAV, risk metrics,
+source manifest, quotation coverage, and performance chart.
+Data used for offline run: SYNTHETIC AND DETERMINISTIC, NOT REAL MARKET DATA.
+Live TSETMC verification: NOT PERFORMED; DNS access to cdn.tsetmc.com was
+unavailable in the build environment.
+External use: Conda installation and live network access must be verified
+on the user's local machine before trusting live-market results.
